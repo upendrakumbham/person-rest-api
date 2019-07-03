@@ -5,6 +5,8 @@ import com.ebi.personrestapi.security.JwtGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/token")
 public class TokenController {
@@ -16,7 +18,7 @@ public class TokenController {
     }
 
     @PostMapping
-    public String generate(@RequestBody final JwtUser jwtUser){
-       return jwtGenerator.generate(jwtUser);
+    public String generate(Principal loggedInUser){
+       return jwtGenerator.generate(loggedInUser.getName());
     }
 }

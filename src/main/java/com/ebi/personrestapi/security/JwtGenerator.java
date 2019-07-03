@@ -6,19 +6,20 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+import java.util.Date;
+
 @Component
 public class JwtGenerator {
 
-    public String generate(JwtUser jwtUser) {
+    public String generate(String username) {
         Claims claims = Jwts.claims()
-                         .setSubject(jwtUser.getUserName());
-                       claims.put("userId",String.valueOf(jwtUser.getId()));
-                       claims.put("role",jwtUser.getRole());
-
-          return       Jwts.builder()
+                .setIssuedAt(Date.from(Instant.now()))
+                .setSubject(username);
+        return Jwts.builder()
                 .setClaims(claims)
-                        .signWith(SignatureAlgorithm.HS512,"upendra")
-                        .compact();
+                .signWith(SignatureAlgorithm.HS512, "upendra")
+                .compact();
 
     }
 }

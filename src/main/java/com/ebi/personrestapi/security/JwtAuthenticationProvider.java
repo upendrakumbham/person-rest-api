@@ -94,7 +94,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
                throw new RuntimeException("Jwt token is incorrect");
            }
            List<GrantedAuthority> grantedAuthorities = AuthorityUtils.
-                   commaSeparatedStringToAuthorityList(jwtUser.getRole());
+                   commaSeparatedStringToAuthorityList("USER");
 
         return new JwtUserDetails(jwtUser.getUserName(),jwtUser.getId(),token,grantedAuthorities);
     }

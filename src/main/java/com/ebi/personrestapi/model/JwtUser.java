@@ -3,7 +3,7 @@ package com.ebi.personrestapi.model;
 public class JwtUser {
 
     private Long id;
-    private String userName;
+    private String username;
     private String role;
 
     public Long getId() {
@@ -15,11 +15,11 @@ public class JwtUser {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getRole() {
