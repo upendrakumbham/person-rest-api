@@ -28,7 +28,7 @@ public class PersonControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        Alice = getPersons().get(0);
+        Alice = getTestPersons().get(0);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PersonControllerTest {
 
     @Test
     public void getAllPersons() {
-        when(personServiceMock.getAllPersons()).thenReturn(getPersons());
+        when(personServiceMock.getAllPersons()).thenReturn(getTestPersons());
         ResponseEntity<List<Person>> response = subject.getPersons();
         assertSame(HttpStatus.OK, response.getStatusCode());
         assertSame(4, response.getBody().size());
@@ -70,12 +70,14 @@ public class PersonControllerTest {
         doAnswer((nothing) -> null).when(personServiceMock).deletePerson(Alice.getId());
         ResponseEntity response = subject.deletePerson(Alice.getId());
         assertSame(HttpStatus.NO_CONTENT, response.getStatusCode());
+        verify(personServiceMock,times(1)).deletePerson(Alice.getId());
     }
 
-    private List<Person> getPersons() {
+    public static List<Person> getTestPersons() {
         List<String> hobby = Stream.of("reading", "music")
                 .collect(Collectors.toList());
         Person Alice = new Person("Alice", "wonderland", 29, "pink", hobby);
+        Alice.setId(1L);
         Person John = new Person("John", "wonderland", 40, "white", hobby);
         Person Amelie = new Person("Amelie", "wonderland", 52, "black", hobby);
         Person Rabbit = new Person("Rabbit", "White", 13, "green", hobby);
