@@ -16,6 +16,10 @@ public class JwtGenerator {
         Claims claims = Jwts.claims()
                 .setIssuedAt(Date.from(Instant.now()))
                 .setSubject(username);
+        // we can set other claims such as roles
+        // as per the requirements in actual production applications
+        // claims.put("property name", "property value")
+
         return Jwts.builder()
                 .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS512, "upendra")

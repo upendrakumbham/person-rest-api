@@ -1,5 +1,6 @@
 package com.ebi.personrestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
+    @JsonIgnore
     private Long id;
 
     @Column(name = "first_name")

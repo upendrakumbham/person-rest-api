@@ -8,19 +8,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtValidator {
     private String secret = "upendra";
+
     public JwtUser validate(String token) {
-        JwtUser jwtUser = new JwtUser();
+        JwtUser jwtUser = null;
         try {
-            Claims body = Jwts.parser()
+            Claims currentUserClaims = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody();
-            jwtUser.setUserName(body.getSubject());
-            jwtUser.setId(Long.parseLong((String) body.get("userId")));
-            jwtUser.setRole((String) body.get("role"));
 
+            if(currentUserClaims == null)
+                return null;
+            jwtUser = new JwtUser();
+            jwtUser.setUserName(currentUserClaims.getSubject());
+            // we can extract other claims set and assign to the user
         } catch (Exception e) {
-            System.out.println("error" + e.toString());
+            e.printStackTrace();
         }
         return jwtUser;
     }

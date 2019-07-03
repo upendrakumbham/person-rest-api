@@ -4,8 +4,6 @@ import com.ebi.personrestapi.model.JwtAuthenticationToken;
 import com.ebi.personrestapi.model.JwtUser;
 import com.ebi.personrestapi.model.JwtUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -16,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
 @Component
 public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
@@ -41,7 +40,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
      */
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
-      UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+                                                  UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 
     }
 
@@ -89,14 +88,14 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
         String token = jwtAuthenticationToken.getToken();
-           JwtUser jwtUser =  jwtValidator.validate(token) ;
-           if(jwtUser == null){
-               throw new RuntimeException("Jwt token is incorrect");
-           }
-           List<GrantedAuthority> grantedAuthorities = AuthorityUtils.
-                   commaSeparatedStringToAuthorityList("USER");
+        JwtUser jwtUser = jwtValidator.validate(token);
+        if (jwtUser == null) {
+            throw new RuntimeException("Jwt token is incorrect");
+        }
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils.
+                commaSeparatedStringToAuthorityList("USER");
 
-        return new JwtUserDetails(jwtUser.getUserName(),jwtUser.getId(),token,grantedAuthorities);
+        return new JwtUserDetails(jwtUser.getUserName(), jwtUser.getId(), token, grantedAuthorities);
     }
 
     /**
