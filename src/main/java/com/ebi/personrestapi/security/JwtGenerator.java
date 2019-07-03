@@ -4,6 +4,7 @@ import com.ebi.personrestapi.model.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -11,6 +12,9 @@ import java.util.Date;
 
 @Component
 public class JwtGenerator {
+
+    @Value("${jwt.secret}")
+    private String secret;
 
     public String generate(String username) {
         Claims claims = Jwts.claims()
@@ -22,7 +26,7 @@ public class JwtGenerator {
 
         return Jwts.builder()
                 .setClaims(claims)
-                .signWith(SignatureAlgorithm.HS512, "upendra")
+                .signWith(SignatureAlgorithm.HS512,secret)
                 .compact();
 
     }

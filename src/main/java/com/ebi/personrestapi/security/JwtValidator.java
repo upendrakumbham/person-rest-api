@@ -3,11 +3,13 @@ package com.ebi.personrestapi.security;
 import com.ebi.personrestapi.model.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class JwtValidator {
-    private String secret = "upendra";
+    @Value("${jwt.secret}")
+    private String secret;
 
     public JwtUser validate(String token) {
         JwtUser jwtUser = null;
