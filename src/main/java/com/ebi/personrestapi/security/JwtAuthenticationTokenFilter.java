@@ -1,9 +1,11 @@
 package com.ebi.personrestapi.security;
 
+import com.ebi.personrestapi.exception.InvalidTokenException;
 import com.ebi.personrestapi.model.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.authentication.rememberme.InvalidCookieException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -43,11 +45,12 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
         String header = request.getHeader("authorisation");
         if (header == null || !header.startsWith("Token")) {
-            throw new RuntimeException("JWT token is missing");
+            throw new InvalidTokenException("JWT token is missing");
         }
         String authenticationToken = header.substring(6);
         JwtAuthenticationToken token = new JwtAuthenticationToken(authenticationToken);
-        return getAuthenticationManager().authenticate(token);
+        Authentication authentication = getAuthenticationManager().authenticate(token);
+        return authentication;
     }
 
     @Override

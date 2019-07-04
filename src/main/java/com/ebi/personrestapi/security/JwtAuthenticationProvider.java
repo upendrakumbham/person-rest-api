@@ -1,5 +1,6 @@
 package com.ebi.personrestapi.security;
 
+import com.ebi.personrestapi.exception.InvalidTokenException;
 import com.ebi.personrestapi.model.JwtAuthenticationToken;
 import com.ebi.personrestapi.model.JwtUser;
 import com.ebi.personrestapi.model.JwtUserDetails;
@@ -90,7 +91,7 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
         String token = jwtAuthenticationToken.getToken();
         JwtUser jwtUser = jwtValidator.validate(token);
         if (jwtUser == null) {
-            throw new RuntimeException("Jwt token is incorrect");
+            throw new InvalidTokenException("Jwt token is incorrect");
         }
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.
                 commaSeparatedStringToAuthorityList("USER");

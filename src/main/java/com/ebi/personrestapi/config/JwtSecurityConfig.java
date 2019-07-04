@@ -41,6 +41,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         JwtAuthenticationTokenFilter filter = new JwtAuthenticationTokenFilter();
         filter.setAuthenticationManager(authenticationManger());
         filter.setAuthenticationSuccessHandler(new JwtSuccessHandler());
+
         return filter;
     }
 
@@ -64,7 +65,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationTokenFilter(),
                 UsernamePasswordAuthenticationFilter.class);
     }
-    
+
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("john123").password("password").roles("USER").roles("USER");
