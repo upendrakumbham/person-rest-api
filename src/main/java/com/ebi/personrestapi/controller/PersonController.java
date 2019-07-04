@@ -1,6 +1,7 @@
 package com.ebi.personrestapi.controller;
 
 import com.ebi.personrestapi.model.Person;
+import com.ebi.personrestapi.model.PersonsResponse;
 import com.ebi.personrestapi.service.PersonService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,11 +28,13 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Person>> getPersons() {
+    public ResponseEntity<PersonsResponse> getPersons() {
         LOGGER.info("getting all the persons");
         List<Person> persons = personService.getAllPersons();
         LOGGER.info("Retrieved {} records successfully!!", persons.size());
-        return ResponseEntity.ok(persons);
+        PersonsResponse allPersons = new PersonsResponse();
+        allPersons.persons = persons;
+        return ResponseEntity.ok(allPersons);
     }
 
     @GetMapping(value = "/{id}")
