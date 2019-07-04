@@ -74,6 +74,7 @@
  2. Import repo in the any preferred IDE- I used intellij IDEA
  
  3. To run the application through terminal
+    - 'gradlew build'
     - 'gradlew bootRun'  
  4. To run tests
      - gradlew clean test --info
