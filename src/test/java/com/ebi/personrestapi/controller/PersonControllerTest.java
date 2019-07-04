@@ -1,6 +1,7 @@
 package com.ebi.personrestapi.controller;
 
 import com.ebi.personrestapi.model.Person;
+import com.ebi.personrestapi.model.PersonsResponse;
 import com.ebi.personrestapi.service.PersonService;
 import org.junit.Before;
 import org.junit.Test;
@@ -50,9 +51,9 @@ public class PersonControllerTest {
     @Test
     public void getAllPersons() {
         when(personServiceMock.getAllPersons()).thenReturn(getTestPersons());
-        ResponseEntity<List<Person>> response = subject.getPersons();
+        ResponseEntity<PersonsResponse> response = subject.getPersons();
         assertSame(HttpStatus.OK, response.getStatusCode());
-        assertSame(4, response.getBody().size());
+        assertSame(4, response.getBody().persons.size());
     }
 
     @Test
