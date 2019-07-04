@@ -2,15 +2,15 @@
  
  Provides the API's to create, edit, delete and retrieving person entities.
  
-#Technology stack
+# Technology stack
  Solution is developed using Spring Boot framework.
  
  In memory database(h2) is used for the data persistency.
  
-#Notes
+# Notes
  All the API endpoints are secured using JWT token based mechanism.
  
- ##security
+ ## security
  
  A token can be obtained by making a post call to the http://localhost:8088/token endpoint.
  Token endpoint is using the basic auth mechanism.
@@ -21,7 +21,7 @@
  
  Once token is obtained, all the other endpoints can be accessed by sending the token as an Authorization header. Please prefix the token with 'Bearer' when sending the request.
  
- #Available endpoints
+ # Available endpoints
  POST http://localhost:8088/token 
  
  GET http://localhost:8088/api/persons - gets all the person entities
@@ -56,7 +56,7 @@
  
  DELETE http://localhost:8088/api/persons/{id} - deletes the entity with given id
  
- #demo run
+ # demo run
  For the demo purpose application is hosted on Heroku and can be accessed 
  by going to 
     
@@ -64,7 +64,7 @@
  
  Please replace the http://localhost:8088/ with https://persons-services.herokuapp.com/
  
- #how to run
+ # how to run
  This project uses Spring-Boot and Gradle. In order to run it
  
  1. Clone the repository from github:
