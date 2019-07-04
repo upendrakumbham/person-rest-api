@@ -15,8 +15,9 @@
  A token can be obtained by making a post call to the http://localhost:8088/token endpoint.
  Token endpoint is using the basic auth mechanism.
  For the demo purpose, I have taken static user name and password to retrieve the JWT token. 
- Username: john123
- Password: password
+ 
+    Username: john123
+    Password: password
  
  Once token is obtained, all the other endpoints can be accessed by sending the token as an Authorization header. Please prefix the token with 'Bearer' when sending the request.
  
@@ -55,7 +56,9 @@
  
  #demo run
  For the demo purpose application is hosted on Heroku and can be accessed 
- by going to https://persons-services.herokuapp.com/
+ by going to 
+    
+    https://persons-services.herokuapp.com/
  
  Please replace the http://localhost:8088/ with https://persons-services.herokuapp.com/
  
@@ -63,11 +66,15 @@
  This project uses Spring-Boot and Gradle. In order to run it
  
  1. Clone the repository from github:
-  git clone https://github.com/upendrakumbham/person-rest-api.git
+    
+        git clone https://github.com/upendrakumbham/person-rest-api.git
   
  2. Import repo in the any preferred IDE- I used intellij IDEA
  
- 3. 'gradlew bootRun' in the terminal.
- 
- The base url of the API is [http://localhost:8088](http://localhost:8088).
+ 3. To run the application through terminal
+    - 'gradlew bootRun'  
+ 4. To run tests
+     - gradlew clean test --info
+        
+     The base url of the API is [http://localhost:8088](http://localhost:8088).
     
