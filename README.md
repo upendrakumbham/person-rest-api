@@ -26,6 +26,8 @@
  
  GET http://localhost:8088/api/persons - gets all the person entities
  
+    Note: I have included the id for each entity in the response. Id is required to get/delete/update endpoints related to a specific entity.
+ 
  GET http://localhost:8088/api/persons/{id} - gets the person with given id
  
  POST http://localhost:8088/api/persons - creates the person

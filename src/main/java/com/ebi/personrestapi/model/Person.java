@@ -15,7 +15,6 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
-    @JsonIgnore
     private Long id;
 
     @Column(name = "first_name")
