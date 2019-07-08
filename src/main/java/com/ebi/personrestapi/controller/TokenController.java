@@ -18,7 +18,7 @@ public class TokenController {
     }
 
     @PostMapping
-    public String generate(Principal loggedInUser){
+    public String buildJwt(Principal loggedInUser){
        return jwtGenerator.generate(loggedInUser.getName());
     }
 }
