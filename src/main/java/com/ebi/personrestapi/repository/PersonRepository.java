@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PersonRepository extends JpaRepository<Person,Long> {
     Optional<Person> findById(Long id);
-    Optional<Void> deleteById(Long id);
 }
