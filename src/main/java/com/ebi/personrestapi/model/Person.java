@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 @Entity
@@ -16,7 +17,6 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
-
     @Column(name = "first_name")
     @NotEmpty(message = "Please provide your first name")
     private String first_name;
@@ -114,4 +114,19 @@ public class Person {
         return String.format("Person: {first_name: %s, last_name: %s, age: %s, favourite_color: %s}", first_name, last_name, age, favourite_color);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return id.equals(person.id) &&
+                first_name.equals(person.first_name) &&
+                last_name.equals(person.last_name) &&
+                Objects.equals(age, person.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, first_name, last_name, age);
+    }
 }
